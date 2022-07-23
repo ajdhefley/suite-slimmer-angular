@@ -1,7 +1,7 @@
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { TestMockMapper, TestSuiteStrategy } from '@ajdhefley/test-suite';
-import { AngularTestSuiteType } from './angular-test-suite';
+import { TestMockMapper, TestSuiteStrategy } from '@ajdhefley/slim-suite';
+import { AngularTestSuiteType } from './angular-slim-suite';
 
 export class AngularTestStrategy<T> extends TestSuiteStrategy {
     constructor (readonly testType: AngularTestSuiteType, readonly classType: Type<T>) {
