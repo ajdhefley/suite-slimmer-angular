@@ -8,12 +8,23 @@ Eliminates boilerplate code for Angular test files, making them much simpler and
 * Executes additional optimizations (such as purging stylesheets/assets between tests, and configuring the test module only once per suite)
 * Reduces the amount of test code that needs to be written, read, and maintained
 * Greatly increases developer productivity with less time spent on tests
+* Can easily be introduced into existing projects without disruption
 
 ## Usage
 
-Instantiate the framework suite `AngularTestSuite`, providing the type of the component you are testing as a required argument.
+Install the npm package.
 
 ```
+npm install --save-dev slim-suite-angular
+```
+
+Instantiate a test suite, providing the type of the component you are testing as a required argument.
+
+```
+import { AngularTestSuite } from 'slim-suite-angular'
+
+...
+
 new AngularTestSuite(MyExampleComponent, 'component')
 ```
 
@@ -34,7 +45,7 @@ On this object, the following methods available and can be chained:
 * afterEach
 * run
 
-No special configuration is required. As long as your tests are configured under Jest, they will run with slim-suite. (Jasmine plugin is coming soon.)
+No special configuration is required. As long as your tests are configured under Jest, they will run with slim-suite. A Jasmine plugin is coming soon.
 
 ### Examples
 
