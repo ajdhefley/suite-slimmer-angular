@@ -1,5 +1,5 @@
 import { Type } from '@angular/core';
-import { TestMockMapper, TestSuite } from '@ajdhefley/slim-suite';
+import { TestMockMapper, TestSuite } from 'slim-suite';
 import { AngularTestStrategy } from './angular-test-strategy';
 
 export type AngularTestSuiteType = 'component' | 'service';
