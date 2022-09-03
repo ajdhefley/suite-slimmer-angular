@@ -1,10 +1,10 @@
 {
   "name": "slim-suite-angular",
-  "description": "Eliminates boilerplate code for Angular tests, making them a pleasure to read and write.",
+  "description": "Eliminates boilerplate code for Angular test files, making them much simpler and smaller.",
   "author": "Ashton Hefley",
   "repository": "github:https://github.com/ajdhefley/slim-suite-angular",
   "homepage": "https://github.com/ajdhefley/slim-suite-angular#readme",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
