@@ -10,7 +10,7 @@ export class AngularTestSuite<T> extends TestSuite<T> {
         super(classType.name, excludeOthers);
     }
 
-    protected override initializeTest(mockMapper: TestMockMapper, declarations: any[], imports: any[], providers: any[]) {
+    protected override async initializeTest(mockMapper: TestMockMapper, declarations: any[], imports: any[], providers: any[]) {
         switch (this.testType) {
             case 'component': {
                 let componentFixture = TestBed.createComponent(this.classType);
