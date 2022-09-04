@@ -2,10 +2,13 @@
   "name": "slim-suite-angular",
   "description": "Eliminates boilerplate code for Angular test files, making them much simpler and smaller.",
   "author": "Ashton Hefley",
-  "license" : "MIT license",
-  "repository": "github:https://github.com/ajdhefley/slim-suite-angular",
+  "license": "MIT license",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ajdhefley/slim-suite-angular"
+  },
   "homepage": "https://github.com/ajdhefley/slim-suite-angular#readme",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
@@ -13,17 +16,19 @@
     "build": "tsc"
   },
   "devDependencies": {
-    "@angular/common": "^13.0.3",
-    "@angular/core": "^13.0.2",
-    "@angular/platform-browser": "~13.0.0",
-    "@angular/platform-browser-dynamic": "~13.0.0",
     "@types/jest": "^27.0.2",
-    "@types/node": "^16.11.7"
+    "@types/node": "^16.11.7",
+    "typescript": "^4.4.4"
   },
   "dependencies": {
-    "@angular/compiler": "~13.0.0",
-    "rxjs": "^7.4.0",
-    "slim-suite": "^1.0.0",
-    "typescript": "^4.4.4"
+    "@angular/common": "~12.2.2",
+    "@angular/compiler": "~12.2.2",
+    "@angular/core": "~12.2.2",
+    "@angular/platform-browser": "~12.2.2",
+    "@angular/platform-browser-dynamic": "~12.2.2",
+    "@tsconfig/node14": "^1.0.3",
+    "rxjs": "^6.6.3",
+    "slim-suite": "^1.0.5",
+    "tslib": "^2.0.0"
   }
 }

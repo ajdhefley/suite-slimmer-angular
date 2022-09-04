@@ -34,7 +34,7 @@ Or, if you are testing a service:
 new AngularTestSuite(MyExampleHttpService, 'service')
 ```
 
-On this object, the following methods available and can be chained:
+On this object, the following methods are available and can be chained:
 
 * addImports
 * addDeclarations
@@ -43,6 +43,8 @@ On this object, the following methods available and can be chained:
 * addTest
 * beforeEach
 * afterEach
+* beforeAll
+* afterAll
 * run
 
 No special configuration is required. As long as your tests are configured under Jest, they will run with slim-suite. A Jasmine plugin is coming soon.
