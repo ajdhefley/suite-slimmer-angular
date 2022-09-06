@@ -1,10 +1,15 @@
+/**
+ * The following properties are currently unsupported/unavailable:
+ * 
+ * - scrollRestoration
+ **/
 export class HistoryMock {
     length: number;
-    //scrollRestoration: ScrollRestoration;
     state: any;
-    back = jest.fn();
-    forward = jest.fn();
-    go = jest.fn();
-    pushState = jest.fn();
-    replaceState = jest.fn();
+
+    back() { }
+    forward() { }
+    go() { }
+    pushState() { }
+    replaceState() { }
 }

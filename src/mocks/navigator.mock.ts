@@ -9,10 +9,11 @@ export class NavigatorMock {
     mediaSession: MediaSession;
     permissions: Permissions;
     serviceWorker: ServiceWorkerContainer;
-    canShare = jest.fn();
-    getGamepads = jest.fn();
-    requestMediaKeySystemAccess = jest.fn();
-    sendBeacon = jest.fn();
-    share = jest.fn();
-    vibrate = jest.fn();
+    
+    canShare() { }
+    getGamepads() { }
+    requestMediaKeySystemAccess() { }
+    sendBeacon() { }
+    share() { }
+    vibrate() { }
 }

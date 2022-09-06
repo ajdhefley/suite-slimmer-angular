@@ -1,6 +1,6 @@
 import { LocationMock } from './location.mock';
 
-export class DocumentMock extends Document {
+export class DocumentMock {
     URL: string;
     alinkColor: string;
     all: HTMLAllCollection;
@@ -34,18 +34,6 @@ export class DocumentMock extends Document {
     lastModified: string;
     linkColor: string;
     links: HTMLCollectionOf<HTMLAnchorElement | HTMLAreaElement>;
-    get location(): LocationMock {
-        return new LocationMock();
-    }
-    set location(href: string | Location) {
-        
-    }
-    onfullscreenchange: ((this: Document, ev: Event) => any) | null;
-    onfullscreenerror: ((this: Document, ev: Event) => any) | null;
-    onpointerlockchange: ((this: Document, ev: Event) => any) | null;
-    onpointerlockerror: ((this: Document, ev: Event) => any) | null;
-    onreadystatechange: ((this: Document, ev: Event) => any) | null;
-    onvisibilitychange: ((this: Document, ev: Event) => any) | null;
     ownerDocument: null;
     pictureInPictureEnabled: boolean;
     plugins: HTMLCollectionOf<HTMLEmbedElement>;
@@ -58,47 +46,63 @@ export class DocumentMock extends Document {
     title: string;
     visibilityState: DocumentVisibilityState;
     vlinkColor: string;
-    adoptNode= jest.fn();
-    captureEvents = jest.fn();
-    caretRangeFromPoint = jest.fn();
-    clear = jest.fn();
-    close = jest.fn();
-    createAttribute = jest.fn();
-    createAttributeNS = jest.fn();
-    createCDATASection = jest.fn();
-    createComment = jest.fn();
-    createDocumentFragment = jest.fn();
-    createElement = jest.fn();
-    createElementNS = jest.fn();
-    createEvent = jest.fn();
-    createNodeIterator = jest.fn();
-    createProcessingInstruction = jest.fn();
-    createRange = jest.fn();
-    createTextNode = jest.fn();
-    createTreeWalker = jest.fn();
-    execCommand = jest.fn();
-    exitFullscreen = jest.fn();
-    exitPictureInPicture = jest.fn();
-    exitPointerLock = jest.fn();
-    getElementById = jest.fn();
-    getElementsByClassName = jest.fn();
-    getElementsByName = jest.fn();
-    getElementsByTagName = jest.fn();
-    getElementsByTagNameNS = jest.fn();
-    getSelection = jest.fn();
-    hasFocus = jest.fn();
-    hasStorageAccess = jest.fn();
-    importNode = jest.fn();
-    open = jest.fn();
-    queryCommandEnabled = jest.fn();
-    queryCommandIndeterm = jest.fn();
-    queryCommandState = jest.fn();
-    queryCommandSupported = jest.fn();
-    queryCommandValue = jest.fn();
-    releaseEvents = jest.fn();
-    requestStorageAccess = jest.fn();
-    write = jest.fn();
-    writeln = jest.fn();
-    addEventListener = jest.fn();
-    removeEventListener = jest.fn();
+
+    get location(): LocationMock {
+        return new LocationMock();
+    }
+
+    set location(href: string | LocationMock) {
+        
+    }
+
+    onfullscreenchange: ((this: DocumentMock, ev: Event) => any) | null;
+    onfullscreenerror: ((this: DocumentMock, ev: Event) => any) | null;
+    onpointerlockchange: ((this: DocumentMock, ev: Event) => any) | null;
+    onpointerlockerror: ((this: DocumentMock, ev: Event) => any) | null;
+    onreadystatechange: ((this: DocumentMock, ev: Event) => any) | null;
+    onvisibilitychange: ((this: DocumentMock, ev: Event) => any) | null;
+
+    adoptNode() { }
+    captureEvents() { }
+    caretRangeFromPoint() { }
+    clear() { }
+    close() { }
+    createAttribute() { }
+    createAttributeNS() { }
+    createCDATASection() { }
+    createComment() { }
+    createDocumentFragment() { }
+    createElement() { }
+    createElementNS() { }
+    createEvent() { }
+    createNodeIterator() { }
+    createProcessingInstruction() { }
+    createRange() { }
+    createTextNode() { }
+    createTreeWalker() { }
+    execCommand() { }
+    exitFullscreen() { }
+    exitPictureInPicture() { }
+    exitPointerLock() { }
+    getElementById() { }
+    getElementsByClassName() { }
+    getElementsByName() { }
+    getElementsByTagName() { }
+    getElementsByTagNameNS() { }
+    getSelection() { }
+    hasFocus() { }
+    hasStorageAccess() { }
+    importNode() { }
+    open() { }
+    queryCommandEnabled() { }
+    queryCommandIndeterm() { }
+    queryCommandState() { }
+    queryCommandSupported() { }
+    queryCommandValue() { }
+    releaseEvents() { }
+    requestStorageAccess() { }
+    write() { }
+    writeln() { }
+    addEventListener() { }
+    removeEventListener() { }
 }

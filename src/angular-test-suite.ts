@@ -1,6 +1,6 @@
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { TestMockMapper, TestSuite } from 'slim-suite';
+import { mockService, TestMockMapper, TestSuite } from 'slim-suite';
 import { DocumentMock } from './mocks/document.mock';
 import { LocationMock } from './mocks/location.mock';
 import { WindowMock } from './mocks/window.mock';
@@ -36,19 +36,19 @@ export class AngularTestSuite<T> extends TestSuite<T> {
         }
 
         if (!providers.find(p => p.provide === 'Document')) {
-            const mock = new DocumentMock();
+            const mock = mockService(DocumentMock);
             providers.push({ provide: 'Document', useValue: mock });
             mockMapper.addExplicit(Document, mock);
         }
 
         if (!providers.find(p => p.provide === 'Location')) {
-            const mock = new LocationMock();
+            const mock = mockService(LocationMock);
             providers.push({ provide: 'Location', useValue: mock });
             mockMapper.addExplicit(Location, mock);
         }
 
         if (!providers.find(p => p.provide === 'Window')) {
-            const mock = new WindowMock();
+            const mock = mockService(WindowMock);
             providers.push({ provide: 'Window', useValue: mock });
             mockMapper.addExplicit(Window, mock);
         }

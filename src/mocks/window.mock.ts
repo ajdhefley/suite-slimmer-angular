@@ -2,82 +2,96 @@ import { BarPropMock } from './bar-prop.mock';
 import { DocumentMock } from './document.mock';
 import { LocationMock } from './location.mock';
 import { NavigatorMock } from './navigator.mock';
+import { ScreenMock } from './screen-mock';
 
+/**
+ * The following properties are currently unsupported/unavailable:
+ * 
+ * - speechSynthesis
+ * - visualViewport
+ * - customElements
+ * - external
+ * - frameElement
+ **/
 export class WindowMock {
-    clientInformation: NavigatorMock;
-    closed: boolean;
-    //customElements: CustomElementRegistry;
-    devicePixelRatio: number;
     document: DocumentMock;
-    event: Event | undefined;
-    //external: External;
-    //frameElement: Element | null;
-    frames = this;
     history: History;
-    innerHeight: number;
-    innerWidth: number;
-    length: number;
-    get location(): LocationMock {
-        return new LocationMock();
-    }
-    set location(href: string | LocationMock) {
-
-    }
-    locationbar: BarPropMock;
-    menubar: BarPropMock;
-    name: string;
     navigator: NavigatorMock;
-    ondevicemotion: ((this: Window, ev: DeviceMotionEvent) => any) | null;
-    ondeviceorientation: ((this: Window, ev: DeviceOrientationEvent) => any) | null;
-    onorientationchange: ((this: Window, ev: Event) => any) | null;
+    clientInformation: NavigatorMock;
+    event: Event;
+
+    name: string;
+    closed: boolean;
     opener: any;
+
     orientation: number;
     outerHeight: number;
     outerWidth: number;
     pageXOffset: number;
     pageYOffset: number;
-    //parent: WindowProxy;
-    personalbar: BarPropMock;
-    //screen: Screen;
+    devicePixelRatio: number;
+    innerHeight: number;
+    innerWidth: number;
+    length: number;
+
+    screen: ScreenMock;
     screenLeft: number;
     screenTop: number;
     screenX: number;
     screenY: number;
-    scrollX: number;
-    scrollY: number;
-    scrollbars: BarPropMock;
-    self = this
-    //speechSynthesis: SpeechSynthesis;
+    
     status: string;
     statusbar: BarPropMock;
+    personalbar: BarPropMock;
+    locationbar: BarPropMock;
+    menubar: BarPropMock;
     toolbar: BarPropMock;
-    //top: WindowProxy | null;
-    //visualViewport: VisualViewport | null;
-    alert = jest.fn();
-    blur = jest.fn();
-    cancelIdleCallback = jest.fn();
-    captureEvents = jest.fn();
-    close = jest.fn();
-    confirm = jest.fn();
-    focus = jest.fn();
-    getComputedStyle = jest.fn();
-    getSelection = jest.fn();
-    matchMedia = jest.fn();
-    moveBy = jest.fn();
-    moveTo = jest.fn();
-    open = jest.fn();
-    postMessage = jest.fn();
-    print = jest.fn();
-    prompt = jest.fn();
-    releaseEvents = jest.fn();
-    requestIdleCallback = jest.fn();
-    resizeBy = jest.fn();
-    resizeTo = jest.fn();
-    scroll = jest.fn();
-    scrollBy = jest.fn();
-    scrollTo = jest.fn();
-    stop = jest.fn();
-    addEventListener = jest.fn();
-    removeEventListener = jest.fn();
+    scrollbars: BarPropMock;
+    scrollX: number;
+    scrollY: number;
+
+    parent = this;
+    self = this;
+    top = this;
+    frames = this;
     [index: number]: WindowMock;
+
+    get location(): LocationMock {
+        return new LocationMock();
+    }
+
+    set location(href: string | LocationMock) {
+
+    }
+
+    ondevicemotion: ((this: WindowMock, ev: any) => any);
+    ondeviceorientation: ((this: WindowMock, ev: any) => any);
+    onorientationchange: ((this: WindowMock, ev: any) => any);
+
+    alert() { }
+    blur() { }
+    cancelIdleCallback() { }
+    captureEvents() { }
+    close() { }
+    confirm() { }
+    focus() { }
+    getComputedStyle() { }
+    getSelection() { }
+    matchMedia() { }
+    moveBy() { }
+    moveTo() { }
+    open() { }
+    postMessage() { }
+    print() { }
+    prompt() { }
+    releaseEvents() { }
+    requestIdleCallback() { }
+    resizeBy() { }
+    resizeTo() { }
+    scroll() { }
+    scrollBy() { }
+    scrollTo() { }
+    stop() { }
+    addEventListener() { }
+    removeEventListener() { }
 }
