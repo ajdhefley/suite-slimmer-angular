@@ -35,19 +35,19 @@ export class AngularTestSuite<T> extends TestSuite<T> {
             declarations.push(this.classType);
         }
 
-        if (!providers.find(p => p.provide === Document)) {
+        if (!providers.find(p => p.provide === 'Document')) {
             const mock = new DocumentMock();
             providers.push({ provide: 'Document', useValue: mock });
             mockMapper.addExplicit(Document, mock);
         }
 
-        if (!providers.find(p => p.provide === Location)) {
+        if (!providers.find(p => p.provide === 'Location')) {
             const mock = new LocationMock();
             providers.push({ provide: 'Location', useValue: mock });
             mockMapper.addExplicit(Location, mock);
         }
 
-        if (!providers.find(p => p.provide === Window)) {
+        if (!providers.find(p => p.provide === 'Window')) {
             const mock = new WindowMock();
             providers.push({ provide: 'Window', useValue: mock });
             mockMapper.addExplicit(Window, mock);
