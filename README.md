@@ -6,6 +6,8 @@ Eliminates boilerplate code for Angular test files, making them much simpler and
 * Encapsulates test module setup
 * Streamlines dependency mocking by generating providers and replacing functions with spies behind the scenes
 * Executes additional optimizations (such as purging stylesheets/assets between tests, and configuring the test module only once per suite)
+* Injects tested class and mocks directly into each test, no need for managing global variables
+* Provides mocks for Window, Document, and Location objects out of the box
 * Reduces the amount of test code that needs to be written, read, and maintained
 * Greatly increases developer productivity with less time spent on tests
 * Can easily be introduced into existing projects without disruption
@@ -112,4 +114,15 @@ new AngularTestSuite(TestedComponent, 'component')
         ...
     })
     .run();
+```
+
+Test window functions, for example, without any additional setup or configuration, as mocks are injected directly into your tests:
+
+```
+    ...
+    .addTest('should call alert', (component, mocks) => {
+        component.clickSomeBtn();
+        expect(mocks.get(Window).alert).toHaveBeenCalledWith('You clicked the button!');
+    })
+    ...
 ```

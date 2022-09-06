@@ -8,6 +8,7 @@
         "moduleResolution": "node",
         "esModuleInterop": true,
         "skipLibCheck": false,
+        "strictPropertyInitialization": false,
         "lib": [
             "dom"
         ]
