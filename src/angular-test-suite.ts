@@ -1,6 +1,6 @@
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { mockService, TestMockMapper, TestSuite } from 'slim-suite';
+import { mockService, TestMockMapper, TestSuite } from 'suite-slimmer';
 import { DocumentMock } from './mocks/document.mock';
 import { LocationMock } from './mocks/location.mock';
 import { WindowMock } from './mocks/window.mock';

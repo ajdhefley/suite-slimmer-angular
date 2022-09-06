@@ -1,4 +1,4 @@
-# slim-suite-angular
+# suite-slimmer-angular
 
 Eliminates boilerplate code for Angular test files, making them much simpler and smaller.
 
@@ -17,13 +17,13 @@ Eliminates boilerplate code for Angular test files, making them much simpler and
 Install the npm package.
 
 ```
-npm install --save-dev slim-suite-angular
+npm install --save-dev suite-slimmer-angular
 ```
 
 Instantiate a test suite, providing the type of the component you are testing as a required argument.
 
 ```
-import { AngularTestSuite } from 'slim-suite-angular'
+import { AngularTestSuite } from 'suite-slimmer-angular'
 
 ...
 
@@ -49,7 +49,7 @@ On this object, the following methods are available and can be chained:
 * afterAll
 * run
 
-No special configuration is required. As long as your tests are configured under Jest, they will run with slim-suite. A Jasmine plugin is coming soon.
+No special configuration is required. As long as your tests are configured under Jest, they will run with suite-slimmer. A Jasmine plugin is coming soon.
 
 ### Examples
 
