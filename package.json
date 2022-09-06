@@ -8,27 +8,36 @@
     "url": "https://github.com/ajdhefley/slim-suite-angular"
   },
   "homepage": "https://github.com/ajdhefley/slim-suite-angular#readme",
-  "version": "1.2.0",
+  "version": "0.0.1",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
     "prepare": "npm run build",
     "build": "tsc"
   },
-  "devDependencies": {
-    "@types/jest": "^27.0.2",
-    "@types/node": "^16.11.7",
-    "typescript": "^4.4.4"
-  },
-  "dependencies": {
+  "peerDependencies": {
     "@angular/common": "~12.2.2",
     "@angular/compiler": "~12.2.2",
     "@angular/core": "~12.2.2",
     "@angular/platform-browser": "~12.2.2",
     "@angular/platform-browser-dynamic": "~12.2.2",
-    "@tsconfig/node14": "^1.0.3",
     "rxjs": "^6.6.3",
-    "slim-suite": "^1.1.1",
     "tslib": "^2.0.0"
+  },
+  "devDependencies": {
+    "@angular/common": "~12.2.2",
+    "@angular/compiler": "~12.2.2",
+    "@angular/core": "~12.2.2",
+    "@angular/platform-browser": "~12.2.2",
+    "@angular/platform-browser-dynamic": "~12.2.2",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.7",
+    "rxjs": "^6.6.3",
+    "tslib": "^2.0.0",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "@tsconfig/node14": "^1.0.3",
+    "slim-suite": "0.0.2"
   }
 }
