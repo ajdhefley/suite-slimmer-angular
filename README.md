@@ -17,23 +17,19 @@ Install the npm package.
 npm install --save-dev suite-slimmer-angular
 ```
 
-Instantiate a test suite, providing the type of the component you are testing as a required argument.
+Instantiate a test suite, providing the class type being tested.
 
 ```
 import { AngularTestSuite } from 'suite-slimmer-angular'
 
-...
-
+// Test components
 new AngularTestSuite(MyExampleComponent, 'component')
-```
 
-Or, if you are testing a service:
-
-```
+// Or test services
 new AngularTestSuite(MyExampleHttpService, 'service')
 ```
 
-On this object, the following methods are available and can be chained:
+On this object, the following methods are available and chainable:
 
 * addImports
 * addDeclarations
@@ -46,7 +42,7 @@ On this object, the following methods are available and can be chained:
 * afterAll
 * run
 
-No special configuration is required. As long as your tests are configured under Jest, they will run with suite-slimmer. Jasmine support is coming soon.
+No special configuration is required, as your existing Jest configuration will be utilized. Jasmine support is coming soon.
 
 ### Examples
 
@@ -117,12 +113,12 @@ new AngularTestSuite(TestedComponent, 'component')
 
 ---
 
-Test window functions, without any additional setup or configuration. Mocks are injected directly into your tests, with Window, Document, and Location included by default.
+Mocks are injected directly into your tests, with Window, Document, and Location included by default.
 
 ```
 new AngularTestSuite(TestedComponent, 'component')
     .addTest('should call alert', (component, mocks) => {
-        const windowMock = mocks.get(Window)
+        const windowMock = mocks.get(Window);
         component.clickSomeBtn();
         expect(windowMock.alert).toHaveBeenCalledWith('You clicked the button!');
     })
