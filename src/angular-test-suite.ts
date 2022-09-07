@@ -1,15 +1,24 @@
 import { Type } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { mockService, TestMockMapper, TestSuite } from 'suite-slimmer';
 import { DocumentMock } from './mocks/document.mock';
 import { LocationMock } from './mocks/location.mock';
 import { WindowMock } from './mocks/window.mock';
 
+export type AngularTestCallback<T> = (classInstance: T, mocks: TestMockMapper, fixture: ComponentFixture<T>) => void
+
 export type AngularTestSuiteType = 'component' | 'service';
 
 export class AngularTestSuite<T> extends TestSuite<T> {
+    private fixture: ComponentFixture<T>;
+
     constructor(readonly classType: Type<T>, readonly testType: AngularTestSuiteType, excludeOthers: boolean = false) {
         super(classType.name, excludeOthers);
+    }
+    
+    public override addTest(description: string, callback: AngularTestCallback<T>, excludeOthers?: boolean): TestSuite<T> {
+        const callbackOverride = (classInstance: T, mocks: TestMockMapper) => callback(classInstance, mocks, this.fixture)
+        return super.addTest(description, callbackOverride, excludeOthers);
     }
 
     protected override async initializeTest(mockMapper: TestMockMapper, declarations: any[], imports: any[], providers: any[]) {
@@ -19,7 +28,8 @@ export class AngularTestSuite<T> extends TestSuite<T> {
                 let cls = componentFixture.componentInstance;
 
                 // Trigger the component lifecycle prior to the tests.
-                componentFixture.detectChanges();
+                this.fixture = componentFixture;
+                this.fixture.detectChanges();
 
                 return cls;
             }
