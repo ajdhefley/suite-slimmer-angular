@@ -47,13 +47,7 @@ export class DocumentMock {
     visibilityState: DocumentVisibilityState;
     vlinkColor: string;
 
-    get location(): LocationMock {
-        return new LocationMock();
-    }
-
-    set location(href: string | LocationMock) {
-        
-    }
+    location: LocationMock;
 
     onfullscreenchange: ((this: DocumentMock, ev: Event) => any) | null;
     onfullscreenerror: ((this: DocumentMock, ev: Event) => any) | null;

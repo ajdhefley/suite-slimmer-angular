@@ -1,16 +1,13 @@
 # suite-slimmer-angular
 
-Eliminates boilerplate code for Angular test files, making them much simpler and smaller.
+Streamlines Angular testing.
 
-* Provides an elegant method-chaining API
-* Encapsulates test module setup
-* Streamlines dependency mocking by generating providers and replacing functions with spies behind the scenes
-* Executes additional optimizations (such as purging stylesheets/assets between tests, and configuring the test module only once per suite)
-* Injects tested class and mocks directly into each test, no need for managing global variables
-* Provides mocks for Window, Document, and Location objects out of the box
-* Reduces the amount of test code that needs to be written, read, and maintained
-* Greatly increases developer productivity with less time spent on tests
-* Can easily be introduced into existing projects without disruption
+* Encapsulates test module setup, reducing code duplication and boilerplate
+* Injects tested class and mocked dependencies directly into each test, no need for managing global variables
+* Mocks and spies on dependencies dynamically so you don't have to do it yourself
+* Provides fully spyable mocks for `window`, `document`, and `location` out of the box
+* Executes hidden optimizations such as configuring the test module only once per suite
+* Easily phased into existing projects with no additional configuration required
 
 ## Usage
 
@@ -20,23 +17,19 @@ Install the npm package.
 npm install --save-dev suite-slimmer-angular
 ```
 
-Instantiate a test suite, providing the type of the component you are testing as a required argument.
+Instantiate a test suite, providing the class type being tested.
 
 ```
 import { AngularTestSuite } from 'suite-slimmer-angular'
 
-...
-
+// Test components
 new AngularTestSuite(MyExampleComponent, 'component')
-```
 
-Or, if you are testing a service:
-
-```
+// Or test services
 new AngularTestSuite(MyExampleHttpService, 'service')
 ```
 
-On this object, the following methods are available and can be chained:
+On this object, the following methods are available and chainable:
 
 * addImports
 * addDeclarations
@@ -49,9 +42,11 @@ On this object, the following methods are available and can be chained:
 * afterAll
 * run
 
-No special configuration is required. As long as your tests are configured under Jest, they will run with suite-slimmer. A Jasmine plugin is coming soon.
+No special configuration is required, as your existing Jest configuration will be utilized. Jasmine support is coming soon.
 
 ### Examples
+
+Make your tests more enjoyable to look at and spend less time writing them. In the example below, both the before and after accomplish the same result.
 
 __Before:__
 
@@ -116,13 +111,27 @@ new AngularTestSuite(TestedComponent, 'component')
     .run();
 ```
 
-Test window functions, for example, without any additional setup or configuration, as mocks are injected directly into your tests:
+---
+
+Mocks are injected directly into your tests, with Window, Document, and Location included by default.
 
 ```
-    ...
+new AngularTestSuite(TestedComponent, 'component')
     .addTest('should call alert', (component, mocks) => {
+        const windowMock = mocks.get(Window);
         component.clickSomeBtn();
-        expect(mocks.get(Window).alert).toHaveBeenCalledWith('You clicked the button!');
+        expect(windowMock.alert).toHaveBeenCalledWith('You clicked the button!');
     })
-    ...
+```
+
+----
+
+Acccess the component fixture, if needed.
+
+```
+new AngularTestSuite(TestedComponent, 'component')
+    .addTest('do some stuff', (component, mocks, fixture) => {
+        component.value = 42;
+        fixture.detectChanges();
+    })
 ```

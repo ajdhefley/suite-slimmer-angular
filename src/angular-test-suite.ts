@@ -1,23 +1,25 @@
 import { Type } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { mockService, TestMockMapper, TestSuite } from 'suite-slimmer';
+import { ComponentFixture, TestBed, TestBedStatic } from '@angular/core/testing';
+import { TestMockMapper, TestSuite } from 'suite-slimmer';
+import { MockManager } from './mock-manager';
 import { DocumentMock } from './mocks/document.mock';
 import { LocationMock } from './mocks/location.mock';
 import { WindowMock } from './mocks/window.mock';
 
-export type AngularTestCallback<T> = (classInstance: T, mocks: TestMockMapper, fixture: ComponentFixture<T>) => void
+export type AngularTestCallback<T> = (classInstance: T, mocks: TestMockMapper, fixture: ComponentFixture<T>) => void;
 
 export type AngularTestSuiteType = 'component' | 'service';
 
-export class AngularTestSuite<T> extends TestSuite<T> {
-    private fixture: ComponentFixture<T>;
+export class AngularTestSuite<TClass> extends TestSuite<TClass> {
+    private fixture: ComponentFixture<TClass>;
+    private resetTestingModule: () => TestBedStatic;
 
-    constructor(readonly classType: Type<T>, readonly testType: AngularTestSuiteType, excludeOthers: boolean = false) {
-        super(classType.name, excludeOthers);
+    constructor(readonly classType: Type<TClass>, readonly testType: AngularTestSuiteType, excludeOthers: boolean = false) {
+        super(MockManager.getDependencyMocker(), classType.name, excludeOthers);
     }
     
-    public override addTest(description: string, callback: AngularTestCallback<T>, excludeOthers?: boolean): TestSuite<T> {
-        const callbackOverride = (classInstance: T, mocks: TestMockMapper) => callback(classInstance, mocks, this.fixture)
+    public override addTest(description: string, callback: AngularTestCallback<TClass>, excludeOthers?: boolean) {
+        const callbackOverride = (classInstance: TClass, mocks: TestMockMapper) => callback(classInstance, mocks, this.fixture)
         return super.addTest(description, callbackOverride, excludeOthers);
     }
 
@@ -26,11 +28,7 @@ export class AngularTestSuite<T> extends TestSuite<T> {
             case 'component': {
                 let componentFixture = TestBed.createComponent(this.classType);
                 let cls = componentFixture.componentInstance;
-
-                // Trigger the component lifecycle prior to the tests.
                 this.fixture = componentFixture;
-                this.fixture.detectChanges();
-
                 return cls;
             }
             case 'service': {
@@ -41,39 +39,44 @@ export class AngularTestSuite<T> extends TestSuite<T> {
     }
 
     protected override async initializeTests(mockMapper: TestMockMapper, declarations: any[], imports: any[], providers: any[]) {
+        const mocker = MockManager.getDependencyMocker();
+
         if (this.testType == 'component' && !declarations.includes(this.classType)) {
             declarations.push(this.classType);
         }
 
         if (!providers.find(p => p.provide === 'Document')) {
-            const mock = mockService(DocumentMock);
+            const mock = mocker.mockService(DocumentMock);
             providers.push({ provide: 'Document', useValue: mock });
             mockMapper.addExplicit(Document, mock);
         }
 
         if (!providers.find(p => p.provide === 'Location')) {
-            const mock = mockService(LocationMock);
+            const mock = mocker.mockService(LocationMock);
             providers.push({ provide: 'Location', useValue: mock });
             mockMapper.addExplicit(Location, mock);
         }
 
         if (!providers.find(p => p.provide === 'Window')) {
-            const mock = mockService(WindowMock);
+            const mock = mocker.mockService(WindowMock);
             providers.push({ provide: 'Window', useValue: mock });
             mockMapper.addExplicit(Window, mock);
         }
 
-        TestBed.resetTestingModule();
-    
-        TestBed.configureTestingModule({
+        await TestBed.resetTestingModule();
+
+        await TestBed.configureTestingModule({
             declarations,
             imports,
             providers
-        });
-
-        await TestBed.compileComponents();
+        }).compileComponents();
 
         // prevent Angular from resetting testing module
+        this.resetTestingModule = TestBed.resetTestingModule;
         TestBed.resetTestingModule = () => TestBed;
+    }
+
+    protected override async disposeTests() {
+        TestBed.resetTestingModule = this.resetTestingModule;
     }
 }

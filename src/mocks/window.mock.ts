@@ -56,13 +56,7 @@ export class WindowMock {
     frames = this;
     [index: number]: WindowMock;
 
-    get location(): LocationMock {
-        return new LocationMock();
-    }
-
-    set location(href: string | LocationMock) {
-
-    }
+    location: LocationMock;
 
     ondevicemotion: ((this: WindowMock, ev: any) => any);
     ondeviceorientation: ((this: WindowMock, ev: any) => any);
