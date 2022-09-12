@@ -11,11 +11,15 @@ Streamlines Angular testing.
 
 ## Usage
 
+### Installation
+
 Install the npm package.
 
 ```
 npm install --save-dev suite-slimmer-angular
 ```
+
+### Creating a test
 
 Instantiate a test suite, providing the class type being tested.
 
@@ -42,9 +46,23 @@ On this object, the following methods are available and chainable:
 * afterAll
 * run
 
-No special configuration is required, as your existing Jest configuration will be utilized. Jasmine support is coming soon.
+### Framework configuration
 
-### Examples
+Jasmine and Jest are both supported. If using Jest, no additional configuration is required. If you are using Jasmine, you must add this line in `src/test.ts`:
+
+```
+...
+
+SuiteSlimmer.use('jasmine');
+
+getTestBed().initTestEnvironment(
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting()
+);
+...
+```
+
+## Examples
 
 Make your tests more enjoyable to look at and spend less time writing them. In the example below, both the before and after accomplish the same result.
 
