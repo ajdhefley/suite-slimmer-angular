@@ -1,6 +1,6 @@
 {
   "name": "suite-slimmer-angular",
-  "description": "Eliminates boilerplate code for Angular test files, making them much simpler and smaller.",
+  "description": "Makes Angular tests easy to read and write.",
   "author": "Ashton Hefley",
   "license": "MIT license",
   "repository": {
