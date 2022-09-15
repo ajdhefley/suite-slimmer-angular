@@ -38,6 +38,6 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
-    "suite-slimmer": "^2.0.0"
+    "suite-slimmer": "^3.0.0"
   }
 }

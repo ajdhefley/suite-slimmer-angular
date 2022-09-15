@@ -1,5 +1,5 @@
 import { of } from 'rxjs';
-import { DependencyMocker } from 'suite-slimmer';
+import { DependencyMocker, MockType } from 'suite-slimmer';
 
 export type JasmineMockOf<T> = T & {
     [k in keyof T]: jasmine.Spy;
@@ -28,5 +28,9 @@ export class JasmineMocker extends DependencyMocker {
         }
     
         return object;
+    }
+
+    public override reset<T>(mock: MockType<T>) {
+        Object.values(mock).forEach((spy) => spy.calls.reset());
     }
 }
