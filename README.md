@@ -46,21 +46,13 @@ On this object, the following methods are available and chainable:
 * afterAll
 * run
 
-### Framework configuration
+## Frameworks
 
-Jasmine and Jest are both supported. If using Jest, no additional configuration is required. If you are using Jasmine, you must add this line in `src/test.ts`:
+The following test frameworks are supported:
 
-```
-...
-
-SuiteSlimmer.use('jasmine');
-
-getTestBed().initTestEnvironment(
-  BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting()
-);
-...
-```
+* Jasmine
+* Jest
+* Mocha
 
 ## Examples
 

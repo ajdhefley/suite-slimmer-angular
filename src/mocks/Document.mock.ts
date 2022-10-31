@@ -1,4 +1,4 @@
-import { LocationMock } from './location.mock';
+import { LocationMock } from './Location.mock';
 
 export class DocumentMock {
     URL: string;

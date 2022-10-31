@@ -1,8 +1,8 @@
-import { BarPropMock } from './bar-prop.mock';
-import { DocumentMock } from './document.mock';
-import { LocationMock } from './location.mock';
-import { NavigatorMock } from './navigator.mock';
-import { ScreenMock } from './screen-mock';
+import { BarPropMock } from './BarProp.mock';
+import { DocumentMock } from './Document.mock';
+import { LocationMock } from './Location.mock';
+import { NavigatorMock } from './Navigator.mock';
+import { ScreenMock } from './Screen.mock';
 
 /**
  * The following properties are currently unsupported/unavailable:

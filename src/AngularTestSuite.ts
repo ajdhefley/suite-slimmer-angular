@@ -1,12 +1,12 @@
 import { Type } from '@angular/core';
-import { ComponentFixture, TestBed, TestBedStatic } from '@angular/core/testing';
-import { TestMockMapper, TestSuite } from 'suite-slimmer';
-import { MockManager } from './mock-manager';
-import { DocumentMock } from './mocks/document.mock';
-import { LocationMock } from './mocks/location.mock';
-import { WindowMock } from './mocks/window.mock';
+import { ComponentFixture, getTestBed, TestBed, TestBedStatic } from '@angular/core/testing';
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { MockMapper, TestSuite } from 'suite-slimmer';
+import { DocumentMock } from './mocks/Document.mock';
+import { LocationMock } from './mocks/Location.mock';
+import { WindowMock } from './mocks/Window.mock';
 
-export type AngularTestCallback<T> = (classInstance: T, mocks: TestMockMapper, fixture: ComponentFixture<T>) => void;
+export type AngularTestCallback<T> = (classInstance: T, mocks: MockMapper, fixture: ComponentFixture<T>) => void;
 
 export type AngularTestSuiteType = 'component' | 'service';
 
@@ -15,15 +15,15 @@ export class AngularTestSuite<TClass> extends TestSuite<TClass> {
     private resetTestingModule: () => TestBedStatic;
 
     constructor(readonly classType: Type<TClass>, readonly testType: AngularTestSuiteType, excludeOthers: boolean = false) {
-        super(MockManager.getDependencyMocker(), classType.name, excludeOthers);
+        super(classType.name, excludeOthers);
     }
     
     public override addTest(description: string, callback: AngularTestCallback<TClass>, excludeOthers?: boolean) {
-        const callbackOverride = (classInstance: TClass, mocks: TestMockMapper) => callback(classInstance, mocks, this.fixture)
+        const callbackOverride = (classInstance: TClass, mocks: MockMapper) => callback(classInstance, mocks, this.fixture)
         return super.addTest(description, callbackOverride, excludeOthers);
     }
 
-    protected override async initializeTest(mockMapper: TestMockMapper, declarations: any[], imports: any[], providers: any[]) {
+    protected override async initializeTest(mockMapper: MockMapper, declarations: any[], imports: any[], providers: any[]) {
         switch (this.testType) {
             case 'component': {
                 let componentFixture = TestBed.createComponent(this.classType);
@@ -38,8 +38,8 @@ export class AngularTestSuite<TClass> extends TestSuite<TClass> {
         }
     }
 
-    protected override async initializeTests(mockMapper: TestMockMapper, declarations: any[], imports: any[], providers: any[]) {
-        const mocker = MockManager.getDependencyMocker();
+    protected override async initializeTests(mockMapper: MockMapper, declarations: any[], imports: any[], providers: any[]) {
+        const mocker = (this as any).mockMapper.mocker;
 
         if (this.testType == 'component' && !declarations.includes(this.classType)) {
             declarations.push(this.classType);
@@ -61,6 +61,13 @@ export class AngularTestSuite<TClass> extends TestSuite<TClass> {
             const mock = mocker.mockService(WindowMock);
             providers.push({ provide: 'Window', useValue: mock });
             mockMapper.addExplicit(Window, mock);
+        }
+
+        if (getTestBed().platform == null) {
+            await TestBed.initTestEnvironment(
+                BrowserDynamicTestingModule,
+                platformBrowserDynamicTesting()
+            );
         }
 
         await TestBed.resetTestingModule();
