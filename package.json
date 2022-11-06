@@ -1,6 +1,11 @@
 {
   "name": "suite-slimmer-angular",
   "description": "Makes Angular tests easy to read and write.",
+  "keywords": [
+    "angular",
+    "test",
+    "spec"
+  ],
   "author": "Ashton Hefley",
   "license": "MIT license",
   "repository": {
