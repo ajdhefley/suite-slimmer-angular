@@ -9,6 +9,13 @@ Streamlines Angular testing.
 * Executes hidden optimizations such as configuring the test module only once per suite
 * Easily phased into existing projects with no additional configuration required
 
+
+## Installation
+
+```bash
+npm install suite-slimmer-angular --save-dev
+```
+
 ## Usage
 
 ### Installation
